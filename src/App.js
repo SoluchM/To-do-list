@@ -1,23 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'
 
 function App() {
+  const [task, setTask] = useState('');
+  const [items, setItems] = useState([]);
+
+  function addTask(e) {
+    e.preventDefault();
+    if (!task) {
+      alert('Wpisz zadanie');
+      return;
+    }
+
+    const item = {
+      id: Math.floor(Math.random() * 1000),
+      value: task
+    };
+
+    setItems(oldList => [...oldList, item]);
+    setTask('');
+  }
+
+  function deleteItem(id){
+    const newArray = items.filter(item => item.id !== id);
+    setItems(newArray);
+  }
+
+   /*Dodać ptaszka jako zrobione*/
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="todolist">
+      <p>Lista rzeczy do zrobienia</p>
+
+      <form>
+        <input
+          type="text"
+          className="input"
+          placeholder=" Jakie zadanie na dzisiaj?"
+          value={task}
+          onChange={e => setTask(e.target.value)}
+        />
+        <button onClick={addTask} className="submit">
+          Dodaj
+        </button>
+      </form>
+      <div className='lista'>
+        <ul>
+          {items.map(item => (
+            <li key={item.id}>
+              <div className="task-content">{item.value}</div>
+              <button className="delete" onClick={() => deleteItem(item.id)}>X</button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
