@@ -14,19 +14,31 @@ function App() {
 
     const item = {
       id: Math.floor(Math.random() * 1000),
-      value: task
+      value: task,
+      completed: false
     };
 
     setItems(oldList => [...oldList, item]);
     setTask('');
   }
 
-  function deleteItem(id){
+  function deleteItem(id) {
     const newArray = items.filter(item => item.id !== id);
     setItems(newArray);
   }
 
-   /*Dodać ptaszka jako zrobione*/
+  function toggleComplete(id) {
+    const updatedItems = items.map(item => {
+      if (item.id === id) {
+        return {
+          ...item,
+          completed: !item.completed
+        };
+      }
+      return item;
+    });
+    setItems(updatedItems);
+  }
 
   return (
     <div className="todolist">
@@ -36,7 +48,7 @@ function App() {
         <input
           type="text"
           className="input"
-          placeholder=" Jakie zadanie na dzisiaj?"
+          placeholder="Jakie zadanie na dzisiaj?"
           value={task}
           onChange={e => setTask(e.target.value)}
         />
@@ -44,12 +56,21 @@ function App() {
           Dodaj
         </button>
       </form>
-      <div className='lista'>
+      <div className="lista">
         <ul>
           {items.map(item => (
-            <li key={item.id}>
+            <li key={item.id} className={item.completed ? 'completed' : ''}>
               <div className="task-content">{item.value}</div>
-              <button className="delete" onClick={() => deleteItem(item.id)}>X</button>
+              <label class="form-control"><input
+                type="checkbox"
+                name="checkbox"
+                checked={item.completed}
+                onChange={() => toggleComplete(item.id)}
+              />
+              </label>
+              <button className="delete" onClick={() => deleteItem(item.id)}>
+                X
+              </button>
             </li>
           ))}
         </ul>
