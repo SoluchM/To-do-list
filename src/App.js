@@ -41,6 +41,7 @@ function App() {
   }
 
   return (
+    <container>
     <div className="todolist">
       <p>Lista rzeczy do zrobienia</p>
 
@@ -76,6 +77,7 @@ function App() {
         </ul>
       </div>
     </div>
+    </container>
   );
 }
 

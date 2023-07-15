@@ -1,12 +1,12 @@
 *{
   margin: 0;
   padding: 0;
+  background-color: #1b2223;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .todolist{
   height: 100vh;
-  background-color: #1b2223;
 }
 p{
   width: 100%;
@@ -72,6 +72,7 @@ li:hover{
   backdrop-filter: blur(15px);
 }
 .task-content {
+  background-color: rgba(200, 200, 200, 0);
   flex-grow: 1;
   width: 100%;
 }
