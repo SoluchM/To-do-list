@@ -48,7 +48,7 @@ function App() {
         <input
           type="text"
           className="input"
-          placeholder="Jakie zadanie na dzisiaj?"
+          placeholder=" Jakie zadanie na dzisiaj?"
           value={task}
           onChange={e => setTask(e.target.value)}
         />
